@@ -20,6 +20,7 @@ app.use('/api/auth', usuarioRoutes);
 app.use('/api/inventario', inventarioRoutes);
 app.use('/api/lista', listaRoutes);
 app.use('/api/recetas', recetaRoutes);
+app.use('/api', productoRoutes);
 
 const PORT = process.env.PORT || 3000;
 

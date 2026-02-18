@@ -2,10 +2,12 @@ const Producto = require('../models/Producto');
 
 const obtenerProductos = async (req, res) => {
     try {
-        const usuarioId = req.user.id;
-        
-        const productos = await Producto.find({ usuario: usuarioId })
-            .sort({ createdAt: -1 });
+        const { id_usuario } = req.query;
+
+        // En Sequelize, el orden se pasa dentro del objeto de configuración
+        const productos = await Producto.findAll({ 
+            where: { id_usuario: id_usuario }
+        });
         
         res.status(200).json({
             success: true,
@@ -19,4 +21,5 @@ const obtenerProductos = async (req, res) => {
         });
     }
 };
-module.exports= { obtenerProductos };
+
+module.exports = { obtenerProductos };

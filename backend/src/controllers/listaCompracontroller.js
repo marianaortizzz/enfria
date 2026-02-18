@@ -62,6 +62,27 @@ const eliminarSupermercado = async (req, res) => {
     }
 };
 
+const editarSupermercado = async (req, res) => {
+    try {
+        const { id_lista } = req.params;
+        const { cantidad, precio_estimado } = req.body;
+        const item = await ListaCompra.findByPk(id_lista);
+
+        if (!item) {
+            return res.status(404).json({ error: "El producto no existe en la lista." });
+        }
+
+        await item.update({
+            cantidad: cantidad || item.cantidad,
+            precio_estimado: precio_estimado || item.precio_estimado
+        });
+
+        res.json({ mensaje: "Producto actualizado correctamente.", item });
+    } catch (error) {
+        res.status(500).json({ error: "Error al editar el producto." });
+    }
+};
+
 const verificarStockParaLista = async (id_usuario, id_producto) => {
     try {
         const itemInventario = await Inventario.findOne({
@@ -90,5 +111,6 @@ module.exports = {
     agregarSupermercado,
     mostrarSupermercado,
     eliminarSupermercado,
-    verificarStockParaLista
+    verificarStockParaLista,
+    editarSupermercado
 };

@@ -1,0 +1,499 @@
+/* --- VARIABLES Y RESET --- */
+:root {
+  --primary-color: #1e90ff; /* Azul principal */
+  --secondary-color: #ff7f50; /* Naranja */
+  --accent-color: #2ed573; /* Verde */
+  --neutral-color: #f8f9fa; /* Fondo neutro */
+  --text-color: #2f3542; /* Texto principal */
+  --text-muted: #747d8c; /* Texto secundario */
+  --border-color: #e1e4e8; /* Bordes */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  background-color: var(--neutral-color);
+  color: var(--text-color);
+  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
+  padding: 1rem; /* Added padding to the entire body */
+}
+
+/* --- LAYOUT DEL DASHBOARD --- */
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* --- TARJETAS (CARDS) --- */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--neutral-color);
+  padding-bottom: 0.8rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- TABLAS MODERNAS --- */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #f1f2f6;
+  font-size: 0.95rem;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* --- BOTONES --- */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn-add { background: var(--accent-color); color: white; }
+.btn-add:hover { background: #26af5f; }
+
+.btn-secondary { background: var(--border-color); color: var(--text-color); }
+.btn-secondary:hover { background: #d1d4d8; }
+
+/* Botones por colores para los modales */
+.btn-red-full { background: var(--secondary-color); color: white; }
+.btn-yellow-full { background: var(--primary-color); color: white; }
+
+/* --- MODALES (OVERLAY Y CONTENIDO) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(47, 53, 66, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 20px 25px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+/* --- ESTILOS DE COMPONENTES INTERNOS (CARDS) --- */
+
+/* Contenedor de scroll para las listas */
+.card-content.scrollable {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Estilo Base para Items (Refrigerador y Compras) */
+.item-refrigerador-card, .item-compra-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid #f1f2f6;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.item-refrigerador-card:hover, .item-compra-card:hover {
+    border-color: var(--border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.item-main {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+}
+
+.item-details {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Badges de cantidad y fecha */
+.item-qty-badge, .item-qty-tag {
+    background: #e1f0ff;
+    color: var(--primary-blue);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.item-price {
+    color: var(--accent-color);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+/* Botones de Acción Internos */
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-qty, .btn-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-minus { background: #fff1f0; color: #ff4d4f; }
+.btn-plus { background: #f6ffed; color: #52c41a; }
+.btn-edit { background: #fff7e6; color: #faad14; }
+.btn-delete { background: #fff1f0; color: #ff4d4f; }
+
+.btn-qty:hover:not(:disabled), .btn-action:hover {
+    transform: scale(1.1);
+    filter: brightness(0.95);
+}
+
+/* --- ESTILOS DE RECETAS (GRID INTERNO) --- */
+.card-content .receta-card {
+    position: relative;
+    background: var(--neutral-color);
+    border-radius: 15px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+}
+
+.receta-card:hover {
+    border-color: var(--secondary-color);
+    background: white;
+}
+
+.receta-main-icon {
+    margin-bottom: 0.5rem;
+}
+
+.receta-nombre {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.receta-tiempo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.btn-expand {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.btn-star {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ced4da;
+    transition: color 0.3s;
+}
+
+.btn-star.active {
+    color: var(--primary-color);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* --- FORMULARIOS DENTRO DE MODALES --- */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Crucial para que no se salga del modal */
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+}
+
+/* --- ELEMENTOS ESPECÍFICOS --- */
+.icon-red { color: var(--primary-red); }
+.icon-green { color: var(--primary-green); }
+.icon-yellow { color: var(--primary-yellow); }
+.icon-blue { color: var(--primary-blue); }
+
+.ing-tag {
+  background: #f1f2f6;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin: 0.2rem;
+}
+
+.qty-small { width: 80px; }
+
+.modal-footer-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* --- BADGES Y ESTADOS --- */
+.badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.badge-time { background: #e1f0ff; color: var(--primary-blue); }
+
+/* --- ESTILOS DE COMPONENTES INTERNOS --- */
+
+/* Contenedor de Ingredientes en Modal Rojo */
+.ingredients-selector-box {
+  background: #f8f9fa;
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px dashed var(--border-color);
+}
+
+.ingredients-selector-box h4 {
+  margin-top: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.add-ingredient-inline {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.added-ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* Botón Circular de "+" */
+.btn-add-circle {
+  background: var(--primary-red);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-add-circle:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: #e63946;
+}
+
+/* Estilos para el Modal Azul (Detalles de Receta) */
+.recipe-detail-container h2 {
+  color: var(--primary-blue);
+  margin-bottom: 0.5rem;
+}
+
+.ing-list-display {
+  list-style: none;
+  padding: 0;
+}
+
+.ing-list-display li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+
+.instructions-text {
+  line-height: 1.6;
+  color: var(--text-main);
+  background: #fdfdfd;
+  padding: 1rem;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+/* Switch / Toggle para "Producto Nuevo" */
+.toggle-container {
+  background: #f1f2f6;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.toggle-container input {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Columnas de tabla específicas */
+.col-cantidad {
+  font-weight: bold;
+  color: var(--primary-blue);
+  width: 80px;
+}
+
+.col-precio {
+  color: var(--accent-color);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilo para las filas de la tabla cuando pasas el mouse */
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Mensaje de "Cargando" */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: var(--text-muted);
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: var(--primary-blue);
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
