@@ -1,0 +1,46 @@
+1. Requerimientos Funcionales (RF)
+
+RF-01: Registro de nuevos usuarios solicitando obligatoriamente nombre, correo electrónico único y contraseña.
+
+RF-02: Inicio de sesión mediante validación de credenciales contra la base de datos.
+
+RF-03: Gestión de sesión persistente para permitir que el userId sea accesible por todos los componentes del Dashboard.
+
+RF-04: Visualización en tiempo real de los productos disponibles asociados exclusivamente al ID del usuario activo.
+
+RF-05: Adición de productos al inventario permitiendo la selección desde un catálogo maestro o la creación de un ítem nuevo.
+
+RF-06: Modificación incremental de cantidades (sumar/restar unidades) directamente desde la tarjeta del producto.
+
+RF-07: Visualización de una lista de artículos pendientes por comprar con su respectivo precio estimado y cantidad.
+
+RF-08: Inserción de artículos a la lista con opción de marcar productos como "Nuevos" (no existentes en el catálogo).
+
+RF-09: Edición de parámetros de compra (cantidad y precio) y eliminación definitiva de registros.
+
+RF-10: Creación de recetas complejas que incluyan: nombre, tiempo de preparación, instrucciones (lista de pasos) e ingredientes vinculados.
+
+RF-11: Visualización de detalles de receta en un modal expandido que renderice los pasos en formato de lista numerada.
+
+RF-12: Eliminación de recetas con limpieza automática de dependencias (ingredientes asociados) en la base de datos.
+
+RF-13: Marcado de recetas como "Semanales" (favoritos) mediante un sistema de alternancia (toggle).
+
+RF-14: Gestión centralizada de ventanas emergentes mediante un ModalManager que controle la apertura, cierre y transferencia de datos entre modales.
+
+Requerimientos no Funcionales
+RNF-01: El sistema debe garantizar que un usuario no pueda acceder, editar o borrar datos (productos/recetas) pertenecientes a otro userId.
+
+RNF-02: Las operaciones CRUD (Crear, Leer, Actualizar, Borrar) deben responder en un tiempo menor a 300ms en condiciones normales de red.
+
+RNF-03: La base de datos debe aplicar restricciones de integridad para evitar "datos huérfanos" (ej. ingredientes sin receta).
+
+RNF-04: La interfaz debe adaptarse automáticamente a dispositivos móviles, tablets y escritorio utilizando una cuadrícula dinámica (Grid).
+
+RNF-05: El sistema debe mostrar confirmaciones visuales (alertas o cambios de estado) tras cada acción exitosa o fallida.
+
+RNF-06: Separación estricta entre el Frontend (React) y el Backend (Node/Express) mediante una API RESTful.
+
+RNF-07: El frontend debe estar basado en componentes reutilizables para minimizar la duplicación de código CSS y JSX.
+
+RNF-08: Los datos deben ser almacenados en un motor relacional (SQLite) para garantizar la consistencia de las relaciones ingrediente-receta.
